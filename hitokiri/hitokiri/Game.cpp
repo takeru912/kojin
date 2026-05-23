@@ -8,6 +8,26 @@ Game::Game(const InitData& init)
 
 void Game::update()
 {
+	//stage変える演出
+	if (m_stageChanging) {
+		m_stageTimer += Scene::DeltaTime();
+
+		if (m_stageTimer >= 1.5) {
+			m_stageChanging = false;
+
+			m_stage++;
+
+
+			//stage3クリア後
+			if (m_stage > 3) {
+				changeScene(State::Result);
+				return;
+			}
+			m_count = 0;
+			successCount = 0;
+		}
+		return;
+	}
 
 	switch (m_stage) {
 	case 1:
@@ -44,19 +64,12 @@ void Game::update()
 	if (m_count >= m_maxCount) {
 		//成功回数以上なら次のステージ
 		if (successCount >= needSuccessCount) {
-			m_stage++;
-
-			//stage3クリア後
-			if (m_stage > 3) {
-				changeScene(State::Result);
-			}
+			m_stageChanging = true;
+			m_stageTimer = 0.0;
 		}
 		else {
 			changeScene(State::Result);
 		}
-		//リセット
-		m_count = 0;
-		successCount = 0;
 	}
 
 	if(m_count < m_maxCount) {

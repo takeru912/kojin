@@ -27,6 +27,11 @@ private:
 
 	bool m_isStop = false;
 
+	bool m_stageChanging = false;
+	double m_stageTimer = 0.0;
+	const double STAGE_CHANGE_TIME = 1.5;
+
+
 	Font m_font{ 30 };
 
 	int Gaugespd = 500;
