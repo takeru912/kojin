@@ -115,7 +115,9 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Gauge.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Result.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -328,8 +330,10 @@
     <Xml Include="App\example\xml\test.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BackGround.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Gauge.h" />
     <ClInclude Include="Result.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Title.h" />
