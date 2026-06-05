@@ -1,10 +1,12 @@
 ﻿#include "Game.h"
 
+
 Game::Game(const InitData& init)
-	:IScene{init}
+	: IScene{ init }
+	, m_player()
+	, m_gauge(&m_player)
 {
 }
-
 void Game::update()
 {
 	m_gauge.update();

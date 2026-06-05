@@ -1,8 +1,10 @@
 ﻿#include "stdafx.h"
 #include "Gauge.h"
 
-Gauge::Gauge()
+Gauge::Gauge(Player* player)
+	:m_player(player)
 {
+
 }
 
 void Gauge::update()
@@ -47,13 +49,25 @@ void Gauge::update()
 	}
 
 	//SPACEを押した瞬間の値を記録
-	if (KeySpace.down() && m_count < m_maxCount) {
+	if (KeySpace.down() && m_count < m_maxCount)
+	{
 		m_stopPower = m_power;
 		m_isStop = true;
 
-		//switch文でNEXTステージ判定
-		if (m_stopPower >= successValue) {
+		if (m_stopPower >= 280)
+		{
 			successCount++;
+			m_player->MoveRight(120);
+		}
+		else if (m_stopPower >= 270)
+		{
+			successCount++;
+			m_player->MoveRight(80);
+		}
+		else if (m_stopPower >= 265)
+		{
+			successCount++;
+			m_player->MoveRight(40);
 		}
 
 		m_count++;
@@ -110,5 +124,7 @@ void Gauge::draw() const
 			.draw(Vec2{ 320,450 }, Palette::White);
 	}
 }
+
+
 
 

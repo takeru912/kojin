@@ -168,6 +168,12 @@
     <ClCompile Include="BackGround.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="App\icon.ico">
@@ -849,6 +855,12 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="BackGround.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
