@@ -8,26 +8,6 @@ Gauge::Gauge()
 
 void Gauge::update()
 {
-	//stage変える演出
-	if (m_stageChanging) {
-		m_stageTimer += Scene::DeltaTime();
-
-		if (m_stageTimer >= 1.5) {
-			m_stageChanging = false;
-
-			m_stage++;
-
-
-			//stage3クリア後
-			if (m_stage > 3) {
-				return;
-			}
-			m_count = 0;
-			successCount = 0;
-		}
-		return;
-	}
-
 	switch (m_stage) {
 	case 1:
 		m_maxCount = 3;
@@ -76,7 +56,6 @@ void Gauge::update()
 		//成功回数以上なら次のステージ
 		if (successCount >= needSuccessCount) {
 			m_stageChanging = true;
-			m_stageTimer = 0.0;
 		}
 	}
 
@@ -103,6 +82,8 @@ void Gauge::update()
 			}
 		}
 	}
+
+	
 }
 
 void Gauge::draw() const
@@ -124,6 +105,28 @@ void Gauge::draw() const
 	}
 }
 
+int Gauge::GetStage() const
+{
+	return m_stage;
+}
 
+bool Gauge::IsStageChanging() const
+{
+     	return m_stageChanging;
+}
 
+void Gauge::NextStage()
+{
+	m_stageChanging = false;
+
+	m_stage++;
+
+	if (m_stage > 3)
+	{
+		return;
+	}
+
+	m_count = 0;
+	successCount = 0;
+}
 

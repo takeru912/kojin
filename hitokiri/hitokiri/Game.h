@@ -11,8 +11,12 @@
 	 Game(const InitData& init);
 	 void update() override;
 	 void draw() const override;
+	 
  private:
 	 Player m_player;
 	 Gauge m_gauge;
-	 BackGround m_BG;
+BackGround m_BG;
+
+double m_clearTimer = 0.0;
+bool m_waitNextStage = false;
  };

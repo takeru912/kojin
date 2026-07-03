@@ -1,6 +1,7 @@
 ﻿# pragma once
 # include "Common.h"
 
+
 // ゲームシーン
 class Gauge 
 {
@@ -11,6 +12,11 @@ public:
 	void update() ;
 
 	void draw()const ;
+
+	int GetStage() const;
+	bool IsStageChanging() const;
+
+	void NextStage();
 private:
 
 	// ゲージの位置
@@ -27,7 +33,6 @@ private:
 	bool m_isStop = false;
 
 	bool m_stageChanging = false;
-	double m_stageTimer = 0.0;
 	const double STAGE_CHANGE_TIME = 1.5;
 
 
