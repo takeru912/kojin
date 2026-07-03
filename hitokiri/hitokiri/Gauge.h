@@ -1,13 +1,12 @@
 ﻿# pragma once
 # include "Common.h"
-#include"Player.h"
 
 // ゲームシーン
 class Gauge 
 {
 public:
 
-	Gauge(Player* player);
+	Gauge();
 
 	void update() ;
 
@@ -43,8 +42,6 @@ private:
 	int successCount = 0;
 	int successValue = 0;
 	int needSuccessCount = 0;
-
-
-	Player* m_player = nullptr;
+	int gaugespdratio = 0;
 
 };

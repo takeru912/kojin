@@ -1,8 +1,7 @@
 ﻿#include "stdafx.h"
 #include "Gauge.h"
 
-Gauge::Gauge(Player* player)
-	:m_player(player)
+Gauge::Gauge()
 {
 
 }
@@ -34,17 +33,20 @@ void Gauge::update()
 		m_maxCount = 3;
 		successValue = 265;
 		needSuccessCount = 2;
+		gaugespdratio = 1.0;
 		break;
 
 	case 2:
 		m_maxCount = 5;
 		successValue = 270;
 		needSuccessCount = 3;
+		gaugespdratio = 1.5;
 		break;
 	case 3:
 		m_maxCount = 7;
 		successValue = 280;
 		needSuccessCount = 5;
+		gaugespdratio = 2.0;
 		break;
 	}
 
@@ -56,18 +58,15 @@ void Gauge::update()
 
 		if (m_stopPower >= 280)
 		{
-			successCount++;
-			m_player->MoveRight(120);
+			successCount++;;
 		}
 		else if (m_stopPower >= 270)
 		{
-			successCount++;
-			m_player->MoveRight(80);
+			successCount++;;
 		}
 		else if (m_stopPower >= 265)
 		{
-			successCount++;
-			m_player->MoveRight(40);
+			successCount++;;
 		}
 
 		m_count++;
@@ -85,7 +84,7 @@ void Gauge::update()
 		// ゲージ増減
 		if (m_up)
 		{
-			m_power += Gaugespd * Scene::DeltaTime();
+			m_power += Gaugespd * gaugespdratio * Scene::DeltaTime();
 
 			if (m_power >= 300)
 			{
@@ -95,7 +94,7 @@ void Gauge::update()
 		}
 		else
 		{
-			m_power -= Gaugespd * Scene::DeltaTime();
+			m_power -= Gaugespd * gaugespdratio * Scene::DeltaTime();
 
 			if (m_power <= 0)
 			{
