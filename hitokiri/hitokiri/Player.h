@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include"Common.h"
 #include"Gauge.h"
+#include"NameSpaceScreen.h"
 
 class Player
 {
@@ -14,7 +15,7 @@ public:
 private:
 	Texture chara{ U"image/Chara.png" };
 
-	Vec2 m_charaPos{ 200,500 };
+	Vec2 m_charaPos{ 200,Screen::HEIGHT * 0.55 };
 
 	int pat = 0;
 	int patMax = 4;

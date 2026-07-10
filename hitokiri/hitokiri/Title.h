@@ -1,6 +1,7 @@
 ﻿#pragma once
 # include <Siv3D.hpp>
 # include "Common.h"
+#include "NameSpaceScreen.h"
 
 class Title : public App::Scene
 {
@@ -20,8 +21,7 @@ private:
 	static constexpr int32 FRAME_W = 48;
 	static constexpr int32 FRAME_H = 32;
 
-	double charaX = 200;
-	double charaY = 500;
+	Vec2 m_pos{ 200,Screen::HEIGHT * 0.565 };
 
 public:
 

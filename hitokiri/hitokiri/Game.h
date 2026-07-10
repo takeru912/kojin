@@ -3,6 +3,7 @@
 #include "Gauge.h"
 #include"BackGround.h"
 #include"Player.h"
+#include "Enemy.h"
 
 // ゲームシーン
  class Game : public App::Scene
@@ -15,8 +16,14 @@
  private:
 	 Player m_player;
 	 Gauge m_gauge;
-BackGround m_BG;
+     BackGround m_BG;
+	 Enemy m_enemy;
+	 double spacing;
 
-double m_clearTimer = 0.0;
-bool m_waitNextStage = false;
+     double m_clearTimer = 0.0;
+     bool m_waitNextStage = false;
+
+     Array<Enemy> m_enemies;
+	 void CreateEnemies();
+
  };

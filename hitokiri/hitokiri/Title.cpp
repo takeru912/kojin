@@ -59,7 +59,7 @@ void Title::draw() const
 		FRAME_H
 	};
 
-	chara(srcRect).scaled(2.5).draw(charaX, charaY);
+	chara(srcRect).scaled(2.5).draw(m_pos);
 
 	font(U"Push [SPACE] Key To Play")
 		.draw(100, 400, Palette::White);
