@@ -15,7 +15,7 @@ void Game::update()
 {
 
 	m_gauge.update();
-	m_player.Update();
+	m_player.Update(m_BG.GetPlayGroundRect());
 
 	for (auto& enemy : m_enemies)
 	{

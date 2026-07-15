@@ -2,12 +2,13 @@
 #include"Common.h"
 #include"Gauge.h"
 #include"NameSpaceScreen.h"
+#include"BackGround.h"
 
 class Player
 {
 public:
 	Player();
-	void Update();
+	void Update(const RectF& ground);
 	void Draw()const;
 
 	void SetGauge(Gauge* gauge);
@@ -31,5 +32,8 @@ private:
 
 	Gauge* m_gauge=nullptr;
 
+	RectF GetRect()const;
 
+	double m_speed = 20.0;
+	bool m_isRunning = false;
 };

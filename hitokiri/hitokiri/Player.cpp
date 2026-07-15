@@ -1,15 +1,26 @@
 ﻿#include "stdafx.h"
 #include "Player.h"
 
+RectF Player::GetRect() const
+{
+	return RectF{
+		m_charaPos.x,
+		m_charaPos.y,
+		FRAME_W * 2.5,
+		FRAME_H * 2.5
+	};
+}
+
 Player::Player()
 {
 }
 
-void Player::Update()
+void Player::Update(const RectF& ground)
 {
-
 	if (m_gauge&& m_gauge->IsStageChanging())
 	{
+		m_isRunning = true;
+
 		switch (m_gauge->GetStage())
 		{
 		case 1:
@@ -26,6 +37,11 @@ void Player::Update()
 	else
 	{
 		anime=0;
+	}
+
+	if (m_isRunning)
+	{
+		m_charaPos.x += m_speed;
 	}
 
 	switch (anime)
@@ -87,6 +103,15 @@ void Player::Update()
 	{
 		m_animEnd = false;
 	}
+
+	//地面判定
+	RectF playerRect = GetRect();
+
+	if (playerRect.intersects(ground))
+	{
+		m_charaPos.y = ground.y - playerRect.h;
+	}
+
 }
 
 void Player::Draw() const

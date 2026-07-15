@@ -6,7 +6,8 @@
 
 void Main()
 {
-	Window::Resize(Screen::WIDTH,Screen::HEIGHT);
+	Window::Resize(1280,720);
+	Scene::SetResizeMode(ResizeMode::Keep);
 
 	FontAsset::Register(U"TitleFont", FontMethod::MSDF, 48, U"example/font/RocknRoll/RocknRollOne-Regular.ttf");
 	FontAsset(U"TitleFont").setBufferThickness(4);
