@@ -26,4 +26,8 @@
      Array<Enemy> m_enemies;
 	 void CreateEnemies();
 
+	 bool m_isScrollStarted = false;
+	 double m_scrollTimer=0.0;
+	 
+
  };

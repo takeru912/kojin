@@ -11,35 +11,54 @@ Game::Game(const InitData& init)
 
 	CreateEnemies();
 }
+
 void Game::update()
 {
-
 	m_gauge.update();
+
 	m_player.Update(m_BG.GetPlayGroundRect());
+
+
+	// 80%到達 → スクロール開始
+	if (!m_isScrollStarted &&
+		m_player.GetPos().x >= Scene::Width() * 0.8)
+	{
+		m_BG.StartScroll();
+
+		m_player.ResetPosition();
+
+		m_isScrollStarted = true;
+		m_scrollTimer = 0.0;
+	}
+
+
+	// スクロール中
+	if (m_isScrollStarted)
+	{
+		m_scrollTimer += Scene::DeltaTime();
+
+		if (m_scrollTimer >= 1.0)
+		{
+			m_BG.StopScroll();
+
+			m_isScrollStarted = false;
+			m_scrollTimer = 0.0;
+
+
+			// 次ステージ
+			m_gauge.NextStage();
+
+			CreateEnemies();
+		}
+	}
+
+
+	m_BG.update();
+
 
 	for (auto& enemy : m_enemies)
 	{
 		enemy.Update();
-	}
-
-	if (m_player.IsAnimEnd() && !m_waitNextStage)
-	{
-		m_waitNextStage = true;
-		m_clearTimer = 0.0;
-	}
-
-	if (m_waitNextStage)
-	{
-		m_clearTimer += Scene::DeltaTime();
-
-		if (m_clearTimer >= 1.5)
-		{
-			m_gauge.NextStage();
-
-			CreateEnemies();
-
-			m_waitNextStage = false;
-		}
 	}
 }
 
@@ -47,15 +66,18 @@ void Game::update()
 void Game::draw() const
 {
 	m_BG.draw();
-	// ゲージ描画
-	m_gauge.draw();
-	m_player.Draw();
-
 
 	for (const auto& enemy : m_enemies)
 	{
 		enemy.Draw();
 	}
+
+	m_player.Draw();
+	// ゲージ描画
+	m_gauge.draw();
+
+
+	
 }
 
 void Game::CreateEnemies()

@@ -13,10 +13,11 @@ public:
 
 	void SetGauge(Gauge* gauge);
 	bool IsAnimEnd() const;
+
 private:
 	Texture chara{ U"image/Chara.png" };
 
-	Vec2 m_charaPos{ 200,Screen::HEIGHT * 0.55 };
+	Vec2 m_charaPos{ 200,Screen::HEIGHT * 0.565 };
 
 	int pat = 0;
 	int patMax = 4;
@@ -29,6 +30,7 @@ private:
 
 	int anime = 0;
 	int oldAnime = 0;
+	int animeSpeed = 0;
 
 	Gauge* m_gauge=nullptr;
 
@@ -36,4 +38,9 @@ private:
 
 	double m_speed = 20.0;
 	bool m_isRunning = false;
+	bool m_isScrollStart = false;
+
+public:
+	Vec2 GetPos() const { return m_charaPos; };
+	void ResetPosition();
 };

@@ -17,7 +17,7 @@ Player::Player()
 
 void Player::Update(const RectF& ground)
 {
-	if (m_gauge&& m_gauge->IsStageChanging())
+	if (m_gauge&& m_gauge->IsStageChanging()&& !m_isScrollStart)
 	{
 		m_isRunning = true;
 
@@ -42,21 +42,32 @@ void Player::Update(const RectF& ground)
 	if (m_isRunning)
 	{
 		m_charaPos.x += m_speed;
+
+		if (m_charaPos.x >= Scene::Width()*0.8)
+		{
+			m_charaPos.x = Scene::Width() * 0.8;
+			m_isRunning = false;
+			m_isScrollStart = true;
+		}
 	}
 
 	switch (anime)
 	{
 	case 0:
 		patMax = 4;
+		animeSpeed = 40;
 		break;
 	case 1:
 		patMax = 9;
+		animeSpeed = 10;
 		break;
 	case 2:
 		patMax = 10;
+		animeSpeed = 10;
 		break;
 	case 3:
 		patMax = 15;
+		animeSpeed = 10;
 		break;
 	}
 
@@ -71,7 +82,7 @@ void Player::Update(const RectF& ground)
 
 	count++;
 
-	if (count >= 40)
+	if (count >= animeSpeed)
 	{
 		count = 0;
 
@@ -157,4 +168,11 @@ void Player::SetGauge(Gauge* gauge)
 bool Player::IsAnimEnd() const
 {
 	return m_animEnd;
+}
+
+void Player::ResetPosition()
+{
+	m_charaPos.x = 200;
+	m_isRunning = false;
+	m_isScrollStart = false;
 }
