@@ -55,11 +55,55 @@ void Enemy::Draw()const
 
 	texture(m_frame * width, 0, width, height)
 		.mirrored()
-		.drawAt(m_pos);
+		.drawAt(m_pos, ColorF{ 1.0, m_alpha });
 
+}
+
+void Enemy::Dead()
+{
+	
+		m_isDead = true;
+		m_frame = 0;
+		m_timer.restart();
 }
 
 Vec2 Enemy::GetPos() const
 {
 	return m_pos;
+}
+
+
+RectF Enemy::GetRect() const
+{
+	const auto& enemy = m_enemies[m_type];
+
+	const Texture& texture = m_isDead
+		? enemy.deadTextures
+		: enemy.idleTextures;
+
+	int32 frameCount = m_isDead
+		? enemy.deadframeCount
+		: enemy.idleframeCount;
+
+	int32 width = texture.width() / frameCount;
+	int32 height = texture.height();
+
+	return RectF{
+		Arg::center(m_pos),
+		width,
+		height
+	};
+}
+
+void Enemy::FadeOut()
+{
+	if (m_isDead)
+	{
+		m_alpha -= 1.5 * Scene::DeltaTime();
+
+		if (m_alpha < 0.0)
+		{
+			m_alpha = 0.0;
+		}
+	}
 }

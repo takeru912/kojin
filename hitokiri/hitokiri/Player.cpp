@@ -41,14 +41,14 @@ void Player::Update(const RectF& ground)
 
 	if (m_isRunning)
 	{
-		m_charaPos.x += m_speed;
+		m_charaPos.x += m_speed * Scene::DeltaTime();
+	}
 
-		if (m_charaPos.x >= Scene::Width()*0.8)
-		{
-			m_charaPos.x = Scene::Width() * 0.8;
-			m_isRunning = false;
-			m_isScrollStart = true;
-		}
+	if (!m_isFinalRun && m_charaPos.x >= Scene::Width() * 0.8)
+	{
+		m_charaPos.x = Scene::Width() * 0.8;
+		m_isRunning = false;
+		m_isScrollStart = true;
 	}
 
 	switch (anime)
@@ -128,7 +128,7 @@ void Player::Update(const RectF& ground)
 void Player::Draw() const
 {
 
-	int32 srcX = (pat % patMax) * FRAME_W;
+	int32 srcX = pat * FRAME_W;
 	int32 srcY = 0;
 
 	switch (anime)
@@ -176,3 +176,16 @@ void Player::ResetPosition()
 	m_isRunning = false;
 	m_isScrollStart = false;
 }
+
+void Player::StartRunRight()
+{
+	m_isFinalRun = true;
+	m_isRunning = true;
+	m_isScrollStart = false;
+}
+
+bool Player::IsOutOfScreen() const
+{
+	return m_charaPos.x > Scene::Width();
+}
+

@@ -34,6 +34,7 @@ void Gauge::update()
 	if (KeySpace.down() && m_count < m_maxCount)
 	{
 		m_stopPower = m_power;
+		m_totalScore += static_cast<int32>(m_stopPower);
 		m_isStop = true;
 
 		if (m_stopPower >= 280)
@@ -95,13 +96,25 @@ void Gauge::draw() const
 	.draw(ColorF{ 0.2 });
 
 	// 内側ゲージ
-	RoundRect{ m_gaugePos + Vec2{10, 5}, m_power, 20, 6 }
-	.draw(HSV{ 120 - (m_power / 300.0) * 120 });
+	for (int32 i = 0; i < 30; ++i)
+	{
+		if (i < static_cast<int32>(m_power / 10))
+		{
+			RectF{
+				m_gaugePos.x + 10 + i * 10,
+				m_gaugePos.y + 5,
+				8,
+				20
+			}
+			.draw(HSV{ 120 - (m_power / 300.0) * 120 });
+		}
+	}
 
 	//記録位置表示
-	if (m_isStop) {
+	if (m_isStop)
+	{
 		m_font(U"POWER : {}"_fmt(static_cast<int32>(m_stopPower)))
-			.draw(Vec2{ 320,450 }, Palette::White);
+			.draw(m_gaugePos + Vec2{ 20, -45 }, Palette::White);
 	}
 }
 
@@ -113,6 +126,12 @@ int Gauge::GetStage() const
 bool Gauge::IsStageChanging() const
 {
      	return m_stageChanging;
+}
+
+bool Gauge::IsFailed() const
+{
+	return (m_count >= m_maxCount &&
+			successCount < needSuccessCount);
 }
 
 void Gauge::NextStage()
@@ -130,3 +149,7 @@ void Gauge::NextStage()
 	successCount = 0;
 }
 
+int32 Gauge::GetTotalScore() const
+{
+	return m_totalScore;
+}

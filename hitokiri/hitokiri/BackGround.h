@@ -16,6 +16,9 @@ public:
 	void StopScroll();
 
 	const RectF& GetPlayGroundRect() const;
+
+	double GetScrollSpeed() const { return m_scrollSpeed; }
+
 private:
 	Texture bg{ U"image/BackGround.png" };
 	Texture pg{ U"image/playground.png" };
@@ -29,6 +32,6 @@ private:
 	double m_bgX = 0;
 	double m_pgX = 0;
 	bool m_isScroll = false;
-	double m_scrollSpeed = 5.0;
+	double m_scrollSpeed = 500.0;
 
 };

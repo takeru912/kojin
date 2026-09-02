@@ -17,8 +17,10 @@ void BackGround::update()
 {
 	if (!m_isScroll) return;
 
-	m_bgX -= m_scrollSpeed;
-	m_pgX -= m_scrollSpeed;
+	double move = m_scrollSpeed * Scene::DeltaTime();
+
+	m_bgX -= move;
+	m_pgX -= move;
 
 	if (m_bgX <= -Scene::Width())
 	{

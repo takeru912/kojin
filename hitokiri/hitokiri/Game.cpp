@@ -16,37 +16,69 @@ void Game::update()
 {
 	m_gauge.update();
 
+	if (m_gauge.IsFailed())
+	{
+		changeScene(State::GameOver);
+		return;
+	}
+
 	m_player.Update(m_BG.GetPlayGroundRect());
 
+	bool allEnemiesDead = true;
 
-	// 80%到達 → スクロール開始
-	if (!m_isScrollStarted &&
-		m_player.GetPos().x >= Scene::Width() * 0.8)
+	for (auto& enemy : m_enemies)
+	{
+		enemy.Update();
+
+		if (!enemy.IsDead())
+		{
+			allEnemiesDead = false;
+		}
+
+		if (!enemy.IsDead() &&
+			m_player.GetRect().intersects(enemy.GetRect()))
+		{
+			enemy.Dead();
+		}
+	}
+
+
+	// 敵を全員倒したらスクロール開始
+	if (!m_isScrollStarted && !m_enemies.empty() && allEnemiesDead)
 	{
 		m_BG.StartScroll();
 
-		m_player.ResetPosition();
-
 		m_isScrollStarted = true;
-		m_scrollTimer = 0.0;
+		m_scrollDistance = 0.0;
 	}
 
 
 	// スクロール中
 	if (m_isScrollStarted)
 	{
-		m_scrollTimer += Scene::DeltaTime();
+		for (auto& enemy : m_enemies)
+		{
+			enemy.FadeOut();
+		}
 
-		if (m_scrollTimer >= 1.0)
+		m_scrollDistance += m_BG.GetScrollSpeed() * Scene::DeltaTime();
+
+		if (m_scrollDistance >= Scene::Width())
 		{
 			m_BG.StopScroll();
 
 			m_isScrollStarted = false;
-			m_scrollTimer = 0.0;
+			m_scrollDistance = 0.0;
 
-
-			// 次ステージ
 			m_gauge.NextStage();
+			if (m_gauge.GetStage() > 3)
+			{
+				m_isFinalRun = true;
+				m_player.StartRunRight();
+				return;
+			}
+
+			m_player.ResetPosition();
 
 			CreateEnemies();
 		}
@@ -59,6 +91,14 @@ void Game::update()
 	for (auto& enemy : m_enemies)
 	{
 		enemy.Update();
+	}
+
+	if (m_isFinalRun && m_player.IsOutOfScreen())
+	{
+		getData().score = m_gauge.GetTotalScore();
+
+		changeScene(State::Result);
+		return;
 	}
 }
 
@@ -90,17 +130,17 @@ void Game::CreateEnemies()
 	{
 	case 1:
 		count = 5;
-		spacing = 120;
+		spacing = 90;
 		break;
 
 	case 2:
 		count = 10;
-		spacing = 80;
+		spacing = 60;
 		break;
 
 	case 3:
 		count = 15;
-		spacing = 60;
+		spacing = 45;
 		break;
 
 	}
@@ -113,7 +153,7 @@ void Game::CreateEnemies()
 		Vec2 pos
 		{
 			startX + i * spacing,
-			Screen::HEIGHT * 0.55
+			m_BG.GetPlayGroundRect().y - 32
 		};
 
 		m_enemies.emplace_back(Vec2{pos});

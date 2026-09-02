@@ -30,6 +30,13 @@ void Title::update()
 			pat = 0;
 		}
 	}
+
+
+	if (KeyG.down())
+	{
+		changeScene(State::GameOver);
+	}
+
 }
 
 void Title::draw() const

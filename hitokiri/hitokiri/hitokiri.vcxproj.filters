@@ -145,6 +145,9 @@
     <Filter Include="Result">
       <UniqueIdentifier>{9ae54d98-dde1-4d87-aceb-785e3bd23d78}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameOver">
+      <UniqueIdentifier>{873c2112-44ae-4c50-8c79-38dbe5e19adb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -173,6 +176,9 @@
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOver.cpp">
+      <Filter>GameOver</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -865,6 +871,9 @@
     </ClInclude>
     <ClInclude Include="NameSpaceScreen.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOver.h">
+      <Filter>GameOver</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

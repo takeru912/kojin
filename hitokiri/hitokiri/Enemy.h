@@ -10,6 +10,12 @@ public:
 	void Update();
 	void Draw()const;
 
+	bool IsDead() const { return m_isDead; }
+	void Dead();
+	RectF GetRect() const;
+	void FadeOut();
+
+
     Vec2 GetPos() const;
 private:
 
@@ -38,4 +44,5 @@ private:
 	Stopwatch m_timer{ StartImmediately::Yes };
 
 	bool m_isDead = false;
+	double m_alpha = 1.0;
 };

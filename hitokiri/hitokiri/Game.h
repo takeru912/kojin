@@ -27,7 +27,7 @@
 	 void CreateEnemies();
 
 	 bool m_isScrollStarted = false;
-	 double m_scrollTimer=0.0;
+	 double m_scrollDistance = 0.0;
 	 
-
+	 bool m_isFinalRun = false;
  };

@@ -2,6 +2,7 @@
 # include "Title.h"
 # include "Game.h"
 # include "Result.h"
+#include "GameOver.h"
 #include "NameSpaceScreen.h"
 
 void Main()
@@ -18,6 +19,7 @@ void Main()
 	manager.add<Title>(State::Title);
 	manager.add<Game>(State::Game);
 	manager.add<Result>(State::Result);
+	manager.add<GameOver>(State::GameOver);
 
 	while (System::Update())
 	{

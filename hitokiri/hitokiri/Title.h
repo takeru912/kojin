@@ -21,7 +21,7 @@ private:
 	static constexpr int32 FRAME_W = 48;
 	static constexpr int32 FRAME_H = 32;
 
-	Vec2 m_pos{ 200,Screen::HEIGHT * 0.565 };
+	Vec2 m_pos{ 200,470 };
 
 public:
 

@@ -15,6 +15,7 @@ public:
 private:
 
 	static constexpr int32 RankingCount = 5;
+	int32 m_score = 0;
 
 	int32 m_rank = -1;
 };

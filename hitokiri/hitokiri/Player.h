@@ -14,10 +14,11 @@ public:
 	void SetGauge(Gauge* gauge);
 	bool IsAnimEnd() const;
 
+	void StartRunRight();
 private:
 	Texture chara{ U"image/Chara.png" };
 
-	Vec2 m_charaPos{ 200,Screen::HEIGHT * 0.565 };
+	Vec2 m_charaPos{ 200,445 };
 
 	int pat = 0;
 	int patMax = 4;
@@ -34,13 +35,16 @@ private:
 
 	Gauge* m_gauge=nullptr;
 
-	RectF GetRect()const;
-
-	double m_speed = 20.0;
+	double m_speed = 2000.0;
 	bool m_isRunning = false;
 	bool m_isScrollStart = false;
+	bool m_isFinalRun = false;
 
 public:
 	Vec2 GetPos() const { return m_charaPos; };
 	void ResetPosition();
+
+	RectF GetRect()const;
+
+	bool IsOutOfScreen() const;
 };

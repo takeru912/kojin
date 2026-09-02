@@ -15,12 +15,15 @@ public:
 
 	int GetStage() const;
 	bool IsStageChanging() const;
+	bool IsFailed() const;
+
+	int32 GetTotalScore() const;
 
 	void NextStage();
 private:
 
 	// ゲージの位置
-	Vec2 m_gaugePos{ 250, 500 };
+	Vec2 m_gaugePos{ 450, 300 };
 
 	// ゲージの現在値
 	double m_power = 0.0;
@@ -29,6 +32,7 @@ private:
 	bool m_up = true;
 
 	double m_stopPower = 0.0;
+	int32 m_totalScore = 0;
 
 	bool m_isStop = false;
 
