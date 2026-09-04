@@ -68,6 +68,6 @@ void Title::draw() const
 
 	chara(srcRect).scaled(2.5).draw(m_pos);
 
-	font(U"Push [SPACE] Key To Play")
-		.draw(100, 400, Palette::White);
+	font(U"スペースキーで始める")
+		.draw(100, 400, Palette::Black);
 }
