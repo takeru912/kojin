@@ -69,5 +69,5 @@ void Title::draw() const
 	chara(srcRect).scaled(2.5).draw(m_pos);
 
 	font(U"スペースキーで始める")
-		.draw(100, 400, Palette::Black);
+		.draw(100, 100, Palette::Black);
 }

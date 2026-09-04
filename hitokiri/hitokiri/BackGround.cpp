@@ -42,8 +42,6 @@ void BackGround::draw()const
 
 	pg.resized(Scene::Size()).draw(m_pgX, 0);
 	pg.resized(Scene::Size()).draw(m_pgX + Scene::Width(), 0);
-
-	m_groundRect.drawFrame(2, Palette::Red);
 	
 }
 
